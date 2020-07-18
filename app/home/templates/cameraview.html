@@ -12,7 +12,47 @@ content %} {% include "site_template/navigation.html" %} {% include
           <h3 class="mb-0">Camera View</h3>
         </div>
         <div class="card-body">
-          <h1>{{text}}</h1>
+          <style>
+          .myButton {
+            background-color: #007dc1;
+            border-radius: 28px;
+            border: 1px solid #034e77;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            width: 300px;
+            font-size: 25px;
+            padding: 15px 25px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #020736;
+          }
+          .myButton:hover {
+            background-color: #084a96;
+          }
+          .myButton:active {
+            position: relative;
+            top: 1px;
+          }
+        </style>
+          <h1> <center> {{test}} {{text}} </center></h1>
+          <br> <h3><center >{{firstpart}} {{text}} {{secondpart}}</center></h3>
+          <br> </br>
+          <script>
+            function myFunction() {
+              alert("You have been signed in!")
+            }
+            </script>
+          <center>
+            {% if condition %}
+              <form action="/second" method="post">
+                <button id="view" onclick="myFunction()" class="myButton">Confirm</button>
+              </form>
+            {% endif %}
+
+
+
+          </center>
         </div>
       </div>
     </div>

@@ -32,14 +32,27 @@ except KeyError:
     exit('Error: Invalid APPSEED_CONFIG_MODE environment variable entry.')
 
 app = create_app(config_mode) 
+client = MongoClient("mongodb+srv://admin:Empower999@cluster.dyzkm.mongodb.net/student_db?retryWrites=true&w=majority")
+db = client.get_database('student_db')
+records = db.student_records
 camera = None
 first = ""
+timestamp = ""
 @app.route('/graph', methods=['POST'])
 def graph():
     print("First Variable" + first)
     fchoice = "y"
     schoice = "u"
-    return render_template('cameraview.html', text= "Hi " + first)
+    return render_template('cameraview.html', test = "Welcome", text= first, firstpart = "If you are ", secondpart = ", Click the button below to confirm. If you aren't return to the capture tab.", condition = True)
+
+@app.route('/second', methods=['POST'])
+def second():
+    new_student = {
+        'name': first,
+        'timestamp': timestamp
+    }
+    records.insert_one(new_student)
+    return render_template('index.html')
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():
