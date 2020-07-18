@@ -1,0 +1,92 @@
+{% extends "base_site.html" %} {% block title %} Capture {% endblock title %} {%
+block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block content
+%} {% include "site_template/navigation.html" %} {% include
+"site_template/top-stats.html" %}
+
+<div class="container-fluid mt--7" style="position: absolute; top: 125px;">
+  <center>
+    <video autoplay="true" id="videoElement" width="700" height="700"></video>
+  </center>
+  <canvas id="c" style="display: none;" width="700" height="700"></canvas>
+  <center>
+    <button id="capture" class="myButton">Capture</button>
+  </center>
+<br style="line-height: 5px"></br>
+
+  <style>
+    .myButton {
+      background-color: #007dc1;
+      border-radius: 28px;
+      border: 1px solid #034e77;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Arial;
+      width: 700px;
+      font-size: 25px;
+      padding: 15px 25px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #020736;
+    }
+    .myButton:hover {
+      background-color: #084a96;
+    }
+    .myButton:active {
+      position: relative;
+      top: 1px;
+    }
+  </style>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow border-0"></div>
+    </div>
+  </div>
+  <script>
+    var video = document.querySelector("#videoElement");
+
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    }
+
+    function stop() {
+      var stream = video.srcObject;
+      var tracks = stream.getTracks();
+
+      for (var i = 0; i < tracks.length; i++) {
+        var track = tracks[i];
+        track.stop();
+      }
+
+      video.srcObject = null;
+    }
+    var canvas = document.getElementById("c");
+    var button = document.getElementById("capture");
+
+    button.onclick = function () {
+      canvas.getContext("2d").drawImage(video, 0, 0, 700, 700);
+      var img = canvas.toDataURL("image/png");
+      $.post("/postmethod", {
+        javascript_data: img,
+      });
+      stop();
+      button.style.visibility = "hidden";
+      console.log("stopped");
+    };
+  </script>
+  <center>
+    <form action="/graph" method="post">
+      <button id="view" class="myButton">Next Page</button>
+    </form>
+  </center>
+  {% include "site_template/footer.html" %}
+</div>
+
+{% endblock content %} {% block javascripts %} {{ super()}} {% endblock
+javascripts %}

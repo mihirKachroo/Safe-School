@@ -1,0 +1,23 @@
+{% extends "base_site.html" %} {% block title %} QR Code {% endblock title %} {%
+block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block content
+%} {% include "site_template/navigation.html" %} {% include
+"site_template/top-stats.html" %}
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">QR Code Scanner</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+
+  {% include "site_template/footer.html" %}
+</div>
+
+{% endblock content %} {% block javascripts %} {{ super()}} {% endblock
+javascripts %}

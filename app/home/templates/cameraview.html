@@ -1,0 +1,25 @@
+{% extends "base_site.html" %} {% block title %} Camera View {% endblock title
+%} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
+content %} {% include "site_template/navigation.html" %} {% include
+"site_template/top-stats.html" %}
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Camera View</h3>
+        </div>
+        <div class="card-body">
+          <h1>{{text}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "site_template/footer.html" %}
+</div>
+
+{% endblock content %} {% block javascripts %} {{ super()}} {% endblock
+javascripts %}
