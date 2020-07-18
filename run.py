@@ -12,7 +12,7 @@ from config import config_dict
 from app import create_app, db
 import os
 import shutil
-
+from time import localtime, strftime
 from flask import Flask, jsonify, render_template, redirect, request, url_for, Response, send_file
 
 from camera import Camera
@@ -43,10 +43,11 @@ def graph():
     print("First Variable" + first)
     fchoice = "y"
     schoice = "u"
-    return render_template('cameraview.html', test = "Welcome", text= first, firstpart = "If you are ", secondpart = ", Click the button below to confirm. If you aren't return to the capture tab.", condition = True)
+    return render_template('cameraview.html', test = "Welcome", text= first, firstpart = "If you are ", secondpart = ",click the button below to confirm. If you aren't return to the capture tab.", condition = True, timestamp = "Timestamp: " + timestamp)
 
 @app.route('/second', methods=['POST'])
 def second():
+    print("Timestamp: " + timestamp)
     new_student = {
         'name': first,
         'timestamp': timestamp
@@ -60,7 +61,7 @@ def get_post_javascript_data():
     jsdata = request.form['javascript_data']
     today = datetime.today()
     global timestamp
-    timestamp = today.strftime("%d-%m-%Y %H")
+    timestamp = strftime('%Y-%m-%d %I:%M %p', localtime())
     with open('static/captures/'+timestamp+".png", "wb") as file:
         file.write(base64.b64decode(jsdata[22:]))
     name = str(recognize_faces_image.main('static/captures/'+timestamp+".png"))

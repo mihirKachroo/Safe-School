@@ -2,8 +2,11 @@
 block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block content
 %} {% include "site_template/navigation.html" %} {% include
 "site_template/top-stats.html" %}
+<head>  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/></head>
 
 <div class="container-fluid mt--7" style="position: absolute; top: 125px;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
   <center>
     <video autoplay="true" id="videoElement" width="700" height="700"></video>
   </center>

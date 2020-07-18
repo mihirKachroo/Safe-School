@@ -2,7 +2,7 @@
 %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
 content %} {% include "site_template/navigation.html" %} {% include
 "site_template/top-stats.html" %}
-
+<head>  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/></head>
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -12,6 +12,7 @@ content %} {% include "site_template/navigation.html" %} {% include
           <h3 class="mb-0">Camera View</h3>
         </div>
         <div class="card-body">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
           <style>
           .myButton {
             background-color: #007dc1;
@@ -37,7 +38,7 @@ content %} {% include "site_template/navigation.html" %} {% include
         </style>
           <h1> <center> {{test}} {{text}} </center></h1>
           <br> <h3><center >{{firstpart}} {{text}} {{secondpart}}</center></h3>
-          <br> </br>
+          <br> <h3><center >{{timestamp}}</center></h3></br>
           <script>
             function myFunction() {
               alert("You have been signed in!")
